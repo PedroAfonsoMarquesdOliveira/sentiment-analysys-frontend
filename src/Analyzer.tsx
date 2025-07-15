@@ -25,6 +25,7 @@ const Analyzer: React.FC = () => {
     const [error, setError] = useState<string | null>(null);
     const [language, setLanguage] = useState("en");
     const [apiVersion, setApiVersion] = useState("analyze/");
+    const [articleCount, setArticleCount] = useState(10);
     const navigate = useNavigate();
 
 
@@ -53,7 +54,7 @@ const Analyzer: React.FC = () => {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({ bank_name: bankName.trim() ,
-                    language: language}),
+                    language: language,limit:articleCount}),
                 signal: controller.signal,
             });
 
@@ -215,6 +216,29 @@ const Analyzer: React.FC = () => {
                     </select>
                 </div>
 
+                <div style={{display: "flex", gap: 12, alignItems: "center"}}>
+                    <label htmlFor="article-count" style={{fontWeight: "bold"}}>
+                        Number of articles to fetch:
+                    </label>
+                    <input
+                        id="article-count"
+                        type="number"
+                        min={1}
+                        max={100}
+                        value={articleCount}
+                        onChange={(e) => setArticleCount(Number(e.target.value))}
+                        style={{
+                            padding: 12,
+                            fontSize: "1.1rem",
+                            borderRadius: 8,
+                            border: "1px solid #004d40",
+                            outline: "none",
+                            color: "#004d40",
+                            backgroundColor: "#e0f2f1",
+                            width: 100,
+                        }}
+                    />
+                </div>
 
                 <div style={{display: "flex", gap: 12, width: "100%", maxWidth: 600}}>
                     <input
