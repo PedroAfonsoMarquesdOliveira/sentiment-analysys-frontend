@@ -50,7 +50,7 @@ const Analyzer: React.FC = () => {
         try {
             const controller = new AbortController();
             const timeoutId = setTimeout(() => controller.abort(), 60000);
-            const response = await fetch("http://localhost:8000/"+apiVersion, {
+            const response = await fetch("https://sentiment-analysys-backend.onrender.com/"+apiVersion, {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({ bank_name: bankName.trim() ,
